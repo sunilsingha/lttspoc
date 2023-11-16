@@ -1,0 +1,84 @@
+{
+  "name": "LTTSSLM_POC",
+  "version": "1.0.0",
+  "description": "A simple CAP project.",
+  "repository": "<Add your repository here>",
+  "license": "UNLICENSED",
+  "private": true,
+  "dependencies": {
+    "@sap/cds": ">=5",
+    "@sendgrid/mail": "^7.7.0",
+    "cors": "^2.8.5",
+    "express": "^4",
+    "hdb": "^0.19.0",
+    "moment": "^2.29.4",
+    "request": "^2.88.2",
+    "sap-cf-axios": "^0.3.6",
+    "sap-cf-mailer": "^0.0.5"
+  },
+  "devDependencies": {
+    "@sap/ux-specification": "^1.102.11",
+    "rimraf": "^3.0.2",
+    "sqlite3": "^5.0.4"
+  },
+  "scripts": {
+    "start": "cds run",
+    "watch-project1": "cds watch --open project1/webapp/index.html?sap-ui-xx-viewCache=false",
+    "undeploy": "cf undeploy LTTSSLM_POC --delete-services --delete-service-keys --delete-service-brokers",
+    "build": "rimraf resources mta_archives && mbt build --mtar archive",
+    "deploy": "cf deploy mta_archives/archive.mtar --retries 1",
+    "watch-demoapp": "cds watch --open demoapp/webapp/index.html?sap-ui-xx-viewCache=false",
+    "watch-licenseinventory": "cds watch --open licenseinventory/webapp/index.html?sap-ui-xx-viewCache=false",
+    "watch-empmaster": "cds watch --open empmaster/webapp/index.html?sap-ui-xx-viewCache=false",
+    "watch-empdemo": "cds watch --open empdemo/webapp/index.html?sap-ui-xx-viewCache=false"
+  },
+  "engines": {
+    "node": "^16.15"
+  },
+  "eslintConfig": {
+    "extends": "eslint:recommended",
+    "env": {
+      "es2020": true,
+      "node": true,
+      "jest": true,
+      "mocha": true
+    },
+    "globals": {
+      "SELECT": true,
+      "INSERT": true,
+      "UPDATE": true,
+      "DELETE": true,
+      "CREATE": true,
+      "DROP": true,
+      "CDL": true,
+      "CQL": true,
+      "CXL": true,
+      "cds": true
+    },
+    "rules": {
+      "no-console": "off",
+      "require-atomic-updates": "off"
+    }
+  },
+  "cds": {
+    "requires": {
+      "db": {
+        "model": [
+          "db",
+          "srv"
+        ],
+        "kind": "sql"
+      }
+    },
+    "hana": {
+      "deploy-format": "hdbtable"
+    }
+  },
+  "sapux": [
+    "app/project1",
+    "app/demoapp",
+    "app/licenseinventory",
+    "app/empmaster",
+    "app/empdemo"
+  ]
+}

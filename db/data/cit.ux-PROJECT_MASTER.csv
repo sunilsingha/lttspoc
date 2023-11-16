@@ -1,0 +1,6 @@
+project_id,project_name,project_manager_id,project_manager_name,project_manager_email,project_manager_mobile_number,customer_name,customer_location,business_unit_id,bu_name,estimated_staffing,project_start_date,project_end_date,project_cost_center,customer_funded
+PL44032901,Bayer Customer One-View,W2003276,Rajeev Sinha,rajeev.sinha@ltts.com,9820890129,Bayer Global,Australia,BU10001011,LTTS Healthcare,50,01/08/22,31/07/24,HLTH0001,0
+PL44032923,BHP Data Lake,W4599001,Madhu Ganguly,madhu.ganguly@ltts.com,9819899723,BHP Group,Germany,BU10001011,LTTS Healthcare,35,01/08/22,31/07/25,HLTH0001,1
+PL44032937,Bank of America - S/4 RISE,W6600129,Krishna Venkat,krishna.venkat@ltts.com,7992034571,Bank of America,The United States,BU60006066,LTTS Finance,100,01/08/22,31/07/23,FINC0001,0
+PL44032972,Tata Motors - Fleet Management,W2003004,Rhea Pillai,rhea.pillai@ltts.com,9820890135,Tata Motors,India,BU20002022,LTTS Transportation,55,01/08/22,31/12/24,TRNS0001,1
+PL44032996,China Mobile - User Experience,W2003219,Sudesh Bose,sudesh.bose@ltts.com,9819899749,China Mobile,China,BU30003033,LTTS Telecommunications,40,01/08/22,31/03/25,TELE0001,0

@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Common.xml">
+        <edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml">
+        <edmx:Include Alias="Core" Namespace="Org.OData.Core.V1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/UI.xml">
+        <edmx:Include Alias="UI" Namespace="com.sap.vocabularies.UI.v1"/>
+    </edmx:Reference>
+    <edmx:DataServices>
+        <Schema Namespace="LTTSLMService" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <EntityContainer Name="EntityContainer">
+                <EntitySet Name="BUSINESS_UNIT_MASTER" EntityType="LTTSLMService.BUSINESS_UNIT_MASTER"/>
+                <EntitySet Name="EMPLOYEE_MASTER" EntityType="LTTSLMService.EMPLOYEE_MASTER">
+                    <NavigationPropertyBinding Path="business_unit_id_EmMa_BuUnMa" Target="BUSINESS_UNIT_MASTER"/>
+                </EntitySet>
+                <EntitySet Name="PROJECT_MASTER" EntityType="LTTSLMService.PROJECT_MASTER">
+                    <NavigationPropertyBinding Path="business_unit_id_PrMa_BuUnMa" Target="BUSINESS_UNIT_MASTER"/>
+                </EntitySet>
+                <EntitySet Name="PROJECT_DETAILS" EntityType="LTTSLMService.PROJECT_DETAILS">
+                    <NavigationPropertyBinding Path="business_unit_id_PrDe_BuUnMa" Target="BUSINESS_UNIT_MASTER"/>
+                    <NavigationPropertyBinding Path="project_id_PrDe_PrMa" Target="PROJECT_MASTER"/>
+                    <NavigationPropertyBinding Path="employee_id_PrDe_EmMa" Target="EMPLOYEE_MASTER"/>
+                </EntitySet>
+                <EntitySet Name="LICENSE_MASTER" EntityType="LTTSLMService.LICENSE_MASTER"/>
+                <EntitySet Name="LICENSE_INVENTORY" EntityType="LTTSLMService.LICENSE_INVENTORY">
+                    <NavigationPropertyBinding Path="license_ref_LiIn_LiMa" Target="LICENSE_MASTER"/>
+                    <NavigationPropertyBinding Path="business_unit_id_LiIn_BuUnMa" Target="BUSINESS_UNIT_MASTER"/>
+                    <NavigationPropertyBinding Path="SiblingEntity" Target="LICENSE_INVENTORY"/>
+                </EntitySet>
+                <EntitySet Name="LICENSE_DETAILS" EntityType="LTTSLMService.LICENSE_DETAILS">
+                    <NavigationPropertyBinding Path="license_inv_ref_LiDe_LiIn" Target="LICENSE_INVENTORY"/>
+                </EntitySet>
+                <EntitySet Name="LICENSE_ALLOCATION" EntityType="LTTSLMService.LICENSE_ALLOCATION">
+                    <NavigationPropertyBinding Path="employee_id_LiAl_EmMa" Target="EMPLOYEE_MASTER"/>
+                    <NavigationPropertyBinding Path="project_id_LiAl_PrMa" Target="PROJECT_MASTER"/>
+                    <NavigationPropertyBinding Path="business_unit_id_LiAl_BuUnMa" Target="BUSINESS_UNIT_MASTER"/>
+                    <NavigationPropertyBinding Path="SiblingEntity" Target="LICENSE_ALLOCATION"/>
+                </EntitySet>
+                <FunctionImport Name="prProcessing" Function="LTTSLMService.prProcessing" EntitySet="LICENSE_ALLOCATION"/>
+                <FunctionImport Name="prConfirm" Function="LTTSLMService.prConfirm" EntitySet="LICENSE_ALLOCATION"/>
+                <FunctionImport Name="renewLicense" Function="LTTSLMService.renewLicense" EntitySet="LICENSE_DETAILS"/>
+                <FunctionImport Name="createID" Function="LTTSLMService.createID"/>
+            </EntityContainer>
+            <EntityType Name="BUSINESS_UNIT_MASTER">
+                <Key>
+                    <PropertyRef Name="business_unit_id"/>
+                </Key>
+                <Property Name="business_unit_id" Type="Edm.String" MaxLength="10" Nullable="false"/>
+                <Property Name="bu_name" Type="Edm.String" MaxLength="50" Nullable="false"/>
+                <Property Name="bu_manager_id" Type="Edm.String" MaxLength="10" Nullable="false"/>
+                <Property Name="bu_manager_name" Type="Edm.String" MaxLength="50" Nullable="false"/>
+                <Property Name="bu_manager_email" Type="Edm.String" MaxLength="50" Nullable="false"/>
+                <Property Name="bu_cost_center" Type="Edm.String" MaxLength="10" Nullable="false"/>
+                <Property Name="bu_division" Type="Edm.String" MaxLength="50"/>
+                <Property Name="bu_location" Type="Edm.String" MaxLength="50"/>
+            </EntityType>
+            <EntityType Name="EMPLOYEE_MASTER">
+                <Key>
+                    <PropertyRef Name="employee_id"/>
+                </Key>
+                <Property Name="employee_id" Type="Edm.String" MaxLength="10" Nullable="false"/>
+                <Property Name="salutation" Type="Edm.String" MaxLength="10" Nullable="false"/>
+                <Property Name="first_name" Type="Edm.String" MaxLength="50" Nullable="false"/>
+                <Property Name="middle_name" Type="Edm.String" MaxLength="50"/>
+                <Property Name="last_name" Type="Edm.String" MaxLength="50" Nullable="false"/>
+                <Property Name="gender" Type="Edm.String" MaxLength="10" Nullable="false"/>
+                <Property Name="birthdate" Type="Edm.Date" Nullable="false"/>
+                <Property Name="email_address" Type="Edm.String" MaxLength="50" Nullable="false"/>
+                <Property Name="mobile_number" Type="Edm.String" MaxLength="10" Nullable="false"/>
+                <Property Name="office_number" Type="Edm.String" MaxLength="10"/>
+                <Property Name="business_unit_id" Type="Edm.String" MaxLength="10" Nullable="false"/>
+                <Property Name="department" Type="Edm.String" MaxLength="50" Nullable="false"/>
+                <Property Name="designation" Type="Edm.String" MaxLength="50" Nullable="false"/>
+                <Property Name="hire_date" Type="Edm.Date" Nullable="false"/>
+                <Property Name="job_title" Type="Edm.String" MaxLength="50" Nullable="false"/>
+                <Property Name="manager_name" Type="Edm.String" MaxLength="50" Nullable="false"/>
+                <Property Name="manager_email" Type="Edm.String" MaxLength="50" Nullable="false"/>
+                <Property Name="region_location" Type="Edm.String" MaxLength="50" Nullable="false"/>
+                <Property Name="organization" Type="Edm.String" MaxLength="50" Nullable="false"/>
+                <NavigationProperty Name="business_unit_id_EmMa_BuUnMa" Type="LTTSLMService.BUSINESS_UNIT_MASTER">
+                    <ReferentialConstraint Property="business_unit_id" ReferencedProperty="business_unit_id"/>
+                </NavigationProperty>
+            </EntityType>
+            <EntityType Name="PROJECT_MASTER">
+                <Key>
+                    <PropertyRef Name="project_id"/>
+                </Key>
+                <Property Name="project_id" Type="Edm.String" MaxLength="10" Nullable="false"/>
+                <Property Name="project_name" Type="Edm.String" MaxLength="50" Nullable="false"/>
+                <Property Name="project_manager_id" Type="Edm.String" MaxLength="10" Nullable="false"/>
+                <Property Name="project_manager_name" Type="Edm.String" MaxLength="50" Nullable="false"/>
+                <Property Name="project_manager_email" Type="Edm.String" MaxLength="50" Nullable="false"/>
+                <Property Name="project_manager_mobile_number" Type="Edm.String" MaxLength="10" Nullable="false"/>
+                <Property Name="customer_name" Type="Edm.String" MaxLength="50" Nullable="false"/>
+                <Property Name="customer_location" Type="Edm.String" MaxLength="50" Nullable="false"/>
+                <Property Name="business_unit_id" Type="Edm.String" MaxLength="10" Nullable="false"/>
+                <Property Name="bu_name" Type="Edm.String" MaxLength="50" Nullable="false"/>
+                <Property Name="estimated_staffing" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="project_start_date" Type="Edm.Date" Nullable="false"/>
+                <Property Name="project_end_date" Type="Edm.Date" Nullable="false"/>
+                <Property Name="project_cost_center" Type="Edm.String" MaxLength="10" Nullable="false"/>
+                <Property Name="customer_funded" Type="Edm.Boolean"/>
+                <NavigationProperty Name="business_unit_id_PrMa_BuUnMa" Type="LTTSLMService.BUSINESS_UNIT_MASTER">
+                    <ReferentialConstraint Property="business_unit_id" ReferencedProperty="business_unit_id"/>
+                </NavigationProperty>
+            </EntityType>
+            <EntityType Name="PROJECT_DETAILS">
+                <Property Name="employee_id" Type="Edm.String" MaxLength="10" Nullable="false"/>
+                <Property Name="employee_name" Type="Edm.String" MaxLength="50" Nullable="false"/>
+                <Property Name="project_id" Type="Edm.String" MaxLength="10" Nullable="false"/>
+                <Property Name="business_unit_id" Type="Edm.String" MaxLength="10" Nullable="false"/>
+                <Property Name="activity_name" Type="Edm.String" MaxLength="50" Nullable="false"/>
+                <Property Name="time_allocation" Type="Edm.Decimal" Nullable="false" Scale="variable"/>
+                <Property Name="activity_start_date" Type="Edm.Date" Nullable="false"/>
+                <Property Name="activity_end_date" Type="Edm.Date"/>
+                <NavigationProperty Name="business_unit_id_PrDe_BuUnMa" Type="LTTSLMService.BUSINESS_UNIT_MASTER">
+                    <ReferentialConstraint Property="business_unit_id" ReferencedProperty="business_unit_id"/>
+                </NavigationProperty>
+                <NavigationProperty Name="project_id_PrDe_PrMa" Type="LTTSLMService.PROJECT_MASTER">
+                    <ReferentialConstraint Property="project_id" ReferencedProperty="project_id"/>
+                </NavigationProperty>
+                <NavigationProperty Name="employee_id_PrDe_EmMa" Type="LTTSLMService.EMPLOYEE_MASTER">
+                    <ReferentialConstraint Property="employee_id" ReferencedProperty="employee_id"/>
+                </NavigationProperty>
+            </EntityType>
+            <EntityType Name="LICENSE_MASTER">
+                <Key>
+                    <PropertyRef Name="license_ref"/>
+                </Key>
+                <Property Name="license_ref" Type="Edm.String" MaxLength="10" Nullable="false"/>
+                <Property Name="license_name" Type="Edm.String" MaxLength="50" Nullable="false"/>
+                <Property Name="license_description" Type="Edm.String" MaxLength="200" Nullable="false"/>
+                <Property Name="license_type" Type="Edm.String" MaxLength="50" Nullable="false"/>
+                <Property Name="license_category" Type="Edm.String" MaxLength="50" Nullable="false"/>
+                <Property Name="license_vendor" Type="Edm.String" MaxLength="50" Nullable="false"/>
+                <Property Name="standard_price" Type="Edm.Decimal" Nullable="false" Scale="variable"/>
+            </EntityType>
+            <EntityType Name="LICENSE_INVENTORY">
+                <Key>
+                    <PropertyRef Name="license_inv_ref"/>
+                    <PropertyRef Name="IsActiveEntity"/>
+                </Key>
+                <Property Name="license_inv_ref" Type="Edm.String" MaxLength="10" Nullable="false"/>
+                <Property Name="license_ref" Type="Edm.String" MaxLength="10"/>
+                <Property Name="license_name" Type="Edm.String" MaxLength="50"/>
+                <Property Name="license_type" Type="Edm.String" MaxLength="50"/>
+                <Property Name="business_unit_id" Type="Edm.String" MaxLength="10"/>
+                <Property Name="available_quantity" Type="Edm.Int32"/>
+                <NavigationProperty Name="license_ref_LiIn_LiMa" Type="LTTSLMService.LICENSE_MASTER">
+                    <ReferentialConstraint Property="license_ref" ReferencedProperty="license_ref"/>
+                </NavigationProperty>
+                <NavigationProperty Name="business_unit_id_LiIn_BuUnMa" Type="LTTSLMService.BUSINESS_UNIT_MASTER">
+                    <ReferentialConstraint Property="business_unit_id" ReferencedProperty="business_unit_id"/>
+                </NavigationProperty>
+                <Property Name="IsActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="true"/>
+                <Property Name="HasActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false"/>
+                <Property Name="HasDraftEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false"/>
+                <NavigationProperty Name="DraftAdministrativeData" Type="LTTSLMService.DraftAdministrativeData" ContainsTarget="true"/>
+                <NavigationProperty Name="SiblingEntity" Type="LTTSLMService.LICENSE_INVENTORY"/>
+            </EntityType>
+            <EntityType Name="LICENSE_DETAILS">
+                <Key>
+                    <PropertyRef Name="license_id"/>
+                </Key>
+                <Property Name="license_id" Type="Edm.String" MaxLength="10" Nullable="false"/>
+                <Property Name="license_inv_ref" Type="Edm.String" MaxLength="10" Nullable="false"/>
+                <Property Name="license_name" Type="Edm.String" MaxLength="50" Nullable="false"/>
+                <Property Name="license_type" Type="Edm.String" MaxLength="50" Nullable="false"/>
+                <Property Name="license_vendor" Type="Edm.String" MaxLength="25" Nullable="false"/>
+                <Property Name="license_quantity" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="license_serial_no" Type="Edm.String" MaxLength="25" Nullable="false"/>
+                <Property Name="license_key" Type="Edm.String" MaxLength="50" Nullable="false"/>
+                <Property Name="purchase_date" Type="Edm.Date" Nullable="false"/>
+                <Property Name="purchase_cost" Type="Edm.Decimal" Nullable="false" Scale="variable"/>
+                <Property Name="purchase_reference" Type="Edm.String" MaxLength="10"/>
+                <Property Name="expiration_date" Type="Edm.Date"/>
+                <Property Name="is_allocated" Type="Edm.Boolean" Nullable="false"/>
+                <Property Name="customer_funded" Type="Edm.Boolean"/>
+                <NavigationProperty Name="license_inv_ref_LiDe_LiIn" Type="LTTSLMService.LICENSE_INVENTORY">
+                    <ReferentialConstraint Property="license_inv_ref" ReferencedProperty="license_inv_ref"/>
+                </NavigationProperty>
+            </EntityType>
+            <EntityType Name="LICENSE_ALLOCATION">
+                <Key>
+                    <PropertyRef Name="request_id"/>
+                    <PropertyRef Name="IsActiveEntity"/>
+                </Key>
+                <Property Name="request_id" Type="Edm.String" MaxLength="10" Nullable="false"/>
+                <Property Name="employee_id" Type="Edm.String" MaxLength="10"/>
+                <Property Name="employee_name" Type="Edm.String" MaxLength="100"/>
+                <Property Name="project_id" Type="Edm.String" MaxLength="10"/>
+                <Property Name="business_unit_id" Type="Edm.String" MaxLength="10"/>
+                <Property Name="project_manager_id" Type="Edm.String" MaxLength="10"/>
+                <Property Name="license_name" Type="Edm.String" MaxLength="25"/>
+                <Property Name="license_type" Type="Edm.String" MaxLength="25"/>
+                <Property Name="license_quantity" Type="Edm.Int32"/>
+                <Property Name="license_start" Type="Edm.Date"/>
+                <Property Name="license_end" Type="Edm.Date"/>
+                <Property Name="license_inv_ref" Type="Edm.String" MaxLength="10"/>
+                <Property Name="purchase_reference" Type="Edm.String" MaxLength="10"/>
+                <Property Name="license_id" Type="Edm.String" MaxLength="10"/>
+                <Property Name="license_serial_no" Type="Edm.String" MaxLength="25"/>
+                <Property Name="license_key" Type="Edm.String" MaxLength="50"/>
+                <Property Name="curent_billing" Type="Edm.Decimal" Scale="variable"/>
+                <Property Name="estimated_billing" Type="Edm.Decimal" Scale="variable"/>
+                <Property Name="request_notes" Type="Edm.String" MaxLength="200"/>
+                <Property Name="request_status" Type="Edm.String" MaxLength="25"/>
+                <Property Name="request_date" Type="Edm.Date"/>
+                <Property Name="customer_funded" Type="Edm.Boolean"/>
+                <NavigationProperty Name="employee_id_LiAl_EmMa" Type="LTTSLMService.EMPLOYEE_MASTER">
+                    <ReferentialConstraint Property="employee_id" ReferencedProperty="employee_id"/>
+                </NavigationProperty>
+                <NavigationProperty Name="project_id_LiAl_PrMa" Type="LTTSLMService.PROJECT_MASTER">
+                    <ReferentialConstraint Property="project_id" ReferencedProperty="project_id"/>
+                </NavigationProperty>
+                <NavigationProperty Name="business_unit_id_LiAl_BuUnMa" Type="LTTSLMService.BUSINESS_UNIT_MASTER">
+                    <ReferentialConstraint Property="business_unit_id" ReferencedProperty="business_unit_id"/>
+                </NavigationProperty>
+                <Property Name="IsActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="true"/>
+                <Property Name="HasActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false"/>
+                <Property Name="HasDraftEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false"/>
+                <NavigationProperty Name="DraftAdministrativeData" Type="LTTSLMService.DraftAdministrativeData" ContainsTarget="true"/>
+                <NavigationProperty Name="SiblingEntity" Type="LTTSLMService.LICENSE_ALLOCATION"/>
+            </EntityType>
+            <EntityType Name="DraftAdministrativeData">
+                <Key>
+                    <PropertyRef Name="DraftUUID"/>
+                </Key>
+                <Property Name="DraftUUID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="CreationDateTime" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="CreatedByUser" Type="Edm.String" MaxLength="256"/>
+                <Property Name="DraftIsCreatedByMe" Type="Edm.Boolean"/>
+                <Property Name="LastChangeDateTime" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="LastChangedByUser" Type="Edm.String" MaxLength="256"/>
+                <Property Name="InProcessByUser" Type="Edm.String" MaxLength="256"/>
+                <Property Name="DraftIsProcessedByMe" Type="Edm.Boolean"/>
+            </EntityType>
+            <Action Name="draftPrepare" IsBound="true" EntitySetPath="in">
+                <Parameter Name="in" Type="LTTSLMService.LICENSE_INVENTORY"/>
+                <Parameter Name="SideEffectsQualifier" Type="Edm.String"/>
+                <ReturnType Type="LTTSLMService.LICENSE_INVENTORY"/>
+            </Action>
+            <Action Name="draftPrepare" IsBound="true" EntitySetPath="in">
+                <Parameter Name="in" Type="LTTSLMService.LICENSE_ALLOCATION"/>
+                <Parameter Name="SideEffectsQualifier" Type="Edm.String"/>
+                <ReturnType Type="LTTSLMService.LICENSE_ALLOCATION"/>
+            </Action>
+            <Action Name="draftActivate" IsBound="true" EntitySetPath="in">
+                <Parameter Name="in" Type="LTTSLMService.LICENSE_INVENTORY"/>
+                <ReturnType Type="LTTSLMService.LICENSE_INVENTORY"/>
+            </Action>
+            <Action Name="draftActivate" IsBound="true" EntitySetPath="in">
+                <Parameter Name="in" Type="LTTSLMService.LICENSE_ALLOCATION"/>
+                <ReturnType Type="LTTSLMService.LICENSE_ALLOCATION"/>
+            </Action>
+            <Action Name="draftEdit" IsBound="true" EntitySetPath="in">
+                <Parameter Name="in" Type="LTTSLMService.LICENSE_INVENTORY"/>
+                <Parameter Name="PreserveChanges" Type="Edm.Boolean"/>
+                <ReturnType Type="LTTSLMService.LICENSE_INVENTORY"/>
+            </Action>
+            <Action Name="draftEdit" IsBound="true" EntitySetPath="in">
+                <Parameter Name="in" Type="LTTSLMService.LICENSE_ALLOCATION"/>
+                <Parameter Name="PreserveChanges" Type="Edm.Boolean"/>
+                <ReturnType Type="LTTSLMService.LICENSE_ALLOCATION"/>
+            </Action>
+            <Function Name="prProcessing" IsBound="false" IsComposable="false">
+                <Parameter Name="request_id" Type="Edm.String" MaxLength="10"/>
+                <Parameter Name="pr_id" Type="Edm.String" MaxLength="10"/>
+                <ReturnType Type="LTTSLMService.LICENSE_ALLOCATION"/>
+            </Function>
+            <Function Name="prConfirm" IsBound="false" IsComposable="false">
+                <Parameter Name="request_id" Type="Edm.String" MaxLength="10"/>
+                <Parameter Name="pr_id" Type="Edm.String" MaxLength="10"/>
+                <ReturnType Type="LTTSLMService.LICENSE_ALLOCATION"/>
+            </Function>
+            <Function Name="renewLicense" IsBound="false" IsComposable="false">
+                <Parameter Name="license_id" Type="Edm.String" MaxLength="10"/>
+                <Parameter Name="pr_id" Type="Edm.String" MaxLength="10"/>
+                <ReturnType Type="LTTSLMService.LICENSE_DETAILS"/>
+            </Function>
+            <Function Name="createID" IsBound="false" IsComposable="false">
+                <ReturnType Type="Edm.String"/>
+            </Function>
+            <Annotations Target="LTTSLMService.BUSINESS_UNIT_MASTER">
+                <Annotation Term="Common.Label" String="Business Unit Master"/>
+            </Annotations>
+            <Annotations Target="LTTSLMService.EMPLOYEE_MASTER">
+                <Annotation Term="Common.Label" String="Employee Master"/>
+            </Annotations>
+            <Annotations Target="LTTSLMService.PROJECT_MASTER">
+                <Annotation Term="Common.Label" String="Project Master"/>
+            </Annotations>
+            <Annotations Target="LTTSLMService.PROJECT_DETAILS">
+                <Annotation Term="Common.Label" String="Project Details"/>
+            </Annotations>
+            <Annotations Target="LTTSLMService.LICENSE_MASTER">
+                <Annotation Term="Common.Label" String="License Master"/>
+            </Annotations>
+            <Annotations Target="LTTSLMService.LICENSE_INVENTORY">
+                <Annotation Term="Common.Label" String="License Inventory"/>
+            </Annotations>
+            <Annotations Target="LTTSLMService.EntityContainer/LICENSE_INVENTORY">
+                <Annotation Term="Common.DraftRoot">
+                    <Record Type="Common.DraftRootType">
+                        <PropertyValue Property="ActivationAction" String="LTTSLMService.draftActivate"/>
+                        <PropertyValue Property="EditAction" String="LTTSLMService.draftEdit"/>
+                        <PropertyValue Property="PreparationAction" String="LTTSLMService.draftPrepare"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="LTTSLMService.LICENSE_INVENTORY/IsActiveEntity">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="LTTSLMService.LICENSE_INVENTORY/HasActiveEntity">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="LTTSLMService.LICENSE_INVENTORY/HasDraftEntity">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="LTTSLMService.LICENSE_INVENTORY/DraftAdministrativeData">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="LTTSLMService.LICENSE_DETAILS">
+                <Annotation Term="Common.Label" String="License Details"/>
+            </Annotations>
+            <Annotations Target="LTTSLMService.LICENSE_ALLOCATION">
+                <Annotation Term="Common.Label" String="License Allocation"/>
+            </Annotations>
+            <Annotations Target="LTTSLMService.EntityContainer/LICENSE_ALLOCATION">
+                <Annotation Term="Common.DraftRoot">
+                    <Record Type="Common.DraftRootType">
+                        <PropertyValue Property="ActivationAction" String="LTTSLMService.draftActivate"/>
+                        <PropertyValue Property="EditAction" String="LTTSLMService.draftEdit"/>
+                        <PropertyValue Property="PreparationAction" String="LTTSLMService.draftPrepare"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="LTTSLMService.LICENSE_ALLOCATION/IsActiveEntity">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="LTTSLMService.LICENSE_ALLOCATION/HasActiveEntity">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="LTTSLMService.LICENSE_ALLOCATION/HasDraftEntity">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="LTTSLMService.LICENSE_ALLOCATION/DraftAdministrativeData">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="LTTSLMService.DraftAdministrativeData">
+                <Annotation Term="Common.Label" String="{i18n>Draft_DraftAdministrativeData}"/>
+                </Annotations>
+                <Annotations Target="LTTSLMService.DraftAdministrativeData/DraftUUID">
+                    <Annotation Term="UI.Hidden" Bool="true"/>
+                    <Annotation Term="Common.Label" String="{i18n>Draft_DraftUUID}"/>
+                    </Annotations>
+                    <Annotations Target="LTTSLMService.DraftAdministrativeData/CreationDateTime">
+                        <Annotation Term="Common.Label" String="{i18n>Draft_CreationDateTime}"/>
+                        </Annotations>
+                        <Annotations Target="LTTSLMService.DraftAdministrativeData/CreatedByUser">
+                            <Annotation Term="Common.Label" String="{i18n>Draft_CreatedByUser}"/>
+                            </Annotations>
+                            <Annotations Target="LTTSLMService.DraftAdministrativeData/DraftIsCreatedByMe">
+                                <Annotation Term="UI.Hidden" Bool="true"/>
+                                <Annotation Term="Common.Label" String="{i18n>Draft_DraftIsCreatedByMe}"/>
+                                </Annotations>
+                                <Annotations Target="LTTSLMService.DraftAdministrativeData/LastChangeDateTime">
+                                    <Annotation Term="Common.Label" String="{i18n>Draft_LastChangeDateTime}"/>
+                                    </Annotations>
+                                    <Annotations Target="LTTSLMService.DraftAdministrativeData/LastChangedByUser">
+                                        <Annotation Term="Common.Label" String="{i18n>Draft_LastChangedByUser}"/>
+                                        </Annotations>
+                                        <Annotations Target="LTTSLMService.DraftAdministrativeData/InProcessByUser">
+                                            <Annotation Term="Common.Label" String="{i18n>Draft_InProcessByUser}"/>
+                                            </Annotations>
+                                            <Annotations Target="LTTSLMService.DraftAdministrativeData/DraftIsProcessedByMe">
+                                                <Annotation Term="UI.Hidden" Bool="true"/>
+                                                <Annotation Term="Common.Label" String="{i18n>Draft_DraftIsProcessedByMe}"/>
+                                                </Annotations>
+                                            </Schema>
+                                        </edmx:DataServices>
+                                    </edmx:Edmx>

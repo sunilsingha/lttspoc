@@ -1,0 +1,82 @@
+### Get Business Unit Master
+GET http://localhost:4004/lttslm/BUSINESS_UNIT_MASTER
+
+### Get EMPLOYEE_MASTER
+GET http://localhost:4004/lttslm/EMPLOYEE_MASTER
+
+### Get PROJECT_MASTER
+GET http://localhost:4004/lttslm/PROJECT_MASTER
+
+### Get PROJECT_DETAILS
+GET http://localhost:4004/lttslm/PROJECT_DETAILS
+
+### Get LICENSE_MASTER
+GET http://localhost:4004/lttslm/LICENSE_MASTER
+
+### Get LICENSE_INVENTORY
+GET http://localhost:4004/lttslm/LICENSE_INVENTORY
+
+### Get LICENSE_DETAILS
+GET http://localhost:4004/lttslm/prProcessing(request_id='1376073',pr_id='0010045090')
+
+### Update LICENSE_DETAILS
+PUT http://localhost:4004/lttslm/LICENSE_DETAILS/ML90003719 HTTP/1.1
+Content-Type: application/json
+
+{
+"license_id": "ML90003719",
+"license_inv_ref": "CL30012201",
+"license_name": "Adobe Acrobat",
+"license_type": "Perpetual",
+"license_vendor": "Adobe Systems Inc.",
+"license_quantity": 1,
+"license_serial_no": "XM74398Y",
+"license_key": "FA604-AFFCD-33021-04770",
+"purchase_date": "2022-03-01",
+"purchase_cost": 12000,
+"purchase_reference": "IN4000134",
+"expiration_date": "2025-03-01",
+"is_allocated": true
+}
+
+###--------------------------------------------------------------
+
+### Post LICENSE_ALLOCATION
+POST http://localhost:4004/lttslm/LICENSE_ALLOCATION HTTP/1.1
+Content-Type: application/json
+
+{
+"request_id": "196",
+"employee_id": "W8413276",
+"employee_name": "Rajeev Goyal",
+"project_id": "PL00123",
+"business_unit_id": "BU10001011",
+"project_manager_id": "W8413276",
+"license_name": "VMware Workstation",
+"license_type": "Perpetual",
+"license_quantity": 10,
+"license_start": "2022-09-14",
+"license_end": "2022-09-14",
+"license_id": "123",
+"license_serial_no": "123",
+"license_key": "123",
+"curent_billing": 123,
+"estimated_billing": 123,
+"request_notes": "workflow",
+"request_status": "sc6",
+"request_date":"2022-09-14"
+}
+
+###---------------------------------------------
+
+### Post call
+GET http://localhost:4004/lttslm/renewLicense(license_id='ML90003792',pr_id='001004509') HTTP/1.1
+
+
+###-------------------------------
+### Get Call
+GET http://localhost:4004/lttslm/prConfirm(request_id='118',pr_id='IN4007142') HTTP/1.1
+
+###-------------------------------
+### Get Call
+GET http://localhost:4004/lttslm/createID() HTTP/1.1

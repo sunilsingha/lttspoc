@@ -1,0 +1,16 @@
+employee_id,salutation,first_name,middle_name,last_name,gender,birthdate,email_address,mobile_number,office_number,business_unit_id,department,designation,hire_date,job_title,manager_name,manager_email,region_location,organization
+W8413276,Mr,Rajeev,A,Goyal,Male,1980-09-14,rajeev.goyal@ltts.com,9819899703,56710089,BU10001011,Enterprise Accounts,BU OPs,1980-09-14,Software Programmer,Rajeev Sinha,rajeev.sinha@ltts.com,Chennai,LTTS_INDIA
+W2300128,Mr,Surya,N,Venkat,Male,1980-09-14,surya.venkat@ltts.com,7992034561,53219909,BU10001011,Enterprise Accounts,Software Engineer,1980-09-14,Module Lead,Rajeev Sinha,rajeev.sinha@ltts.com,Mumbai,LTTS_INDIA
+W7590115,Miss,Jasmine,O,Ranawat,Female,1980-09-14,jasmine.ranawat@ltts.com,9820890123,56790125,BU10001011,Enterprise Accounts,Associate,1980-09-14,Senior Programmer,Rajeev Sinha,rajeev.sinha@ltts.com,Bangalore,LTTS_INDIA
+W8413279,Mr,Oscar,Y,D'souza,Male,1980-09-14,oscar.dsouza@ltts.com,9819899719,56893312,BU10001011,Mid-Market,Software Engineer,1980-09-14,Module Lead,Madhu Ganguly,madhu.ganguly@ltts.com,Bangalore,LTTS_INDIA
+W2300132,Mrs,Riya,T,Pillai,Female,1980-09-14,riya.pillai@ltts.com,7992034565,56707811,BU10001011,Mid-Market,Software Engineer,1980-09-14,Software Programmer,Madhu Ganguly,madhu.ganguly@ltts.com,Delhi,LTTS_INDIA
+W7590119,Mrs,Pushpa,N,Verma,Female,1980-09-14,pushpa.verma@ltts.com,9820890129,56708923,BU10001011,Mid-Market,Associate,1980-09-14,Software Programmer,Madhu Ganguly,madhu.ganguly@ltts.com,Chennai,LTTS_INDIA
+W8413283,Mr,Anil,R,Bhaskar,Male,1980-09-14,anil.bhaskar@ltts.com,9819899723,53295610,BU60006066,SME / SMB,Software Engineer,1980-09-14,Senior Programmer,Krishna Venkat,krishna.venkat@ltts.com,Hyderabad,LTTS_INDIA
+W2300133,Miss,Lily,F,Menezes,Female,1980-09-14,lily.menezes@ltts.com,7992034571,53390113,BU60006066,SME / SMB,Associate,1980-09-14,Senior Programmer,Krishna Venkat,krishna.venkat@ltts.com,Surat,LTTS_INDIA
+W7590122,Mrs,Jaspreet,D,Kaur,Female,1980-09-14,jaspreet.kaur@ltts.com,9820890135,56751028,BU60006066,SME / SMB,Associate,1980-09-14,Test Lead,Krishna Venkat,krishna.venkat@ltts.com,Mumbai,LTTS_INDIA
+W8413285,Mrs,Susan,S,Iyer,Female,1980-09-14,susan.iyer@ltts.com,9819899749,56891012,BU20002022,Enterprise Accounts,Project Manager,1980-09-14,Module Lead,Rhea Pillai,rhea.pillai@ltts.com,Mumbai,LTTS_INDIA
+W2300137,Mr,Ashok,H,Patil,Male,1980-09-14,ashok.patil@ltts.com,7992034579,56720234,BU20002022,Enterprise Accounts,Software Engineer,1980-09-14,Senior Programmer,Rhea Pillai,rhea.pillai@ltts.com,Chennai,LTTS_INDIA
+W7590126,Mr,Arun,S,Nair,Male,1980-09-14,arun.nair@ltts.com,9820890166,56771236,BU20002022,Enterprise Accounts,Associate,1980-09-14,Software Programmer,Rhea Pillai,rhea.pillai@ltts.com,Delhi,LTTS_INDIA
+W8413292,Mr,Kulwant,A,Singh,Male,1980-09-14,kulwant.singh@ltts.com,9819899788,53251034,BU30003033,Mid-Market,Project Manager,1980-09-14,Software Programmer,Sudesh Bose,sudesh.bose@ltts.com,Hyderabad,LTTS_INDIA
+W2300144,Miss,Deepa,L,Shah,Female,1980-09-14,deepa.shah@ltts.com,7992034595,53271934,BU30003033,Mid-Market,Senior Software Engineer,1980-09-14,Test Lead,Sudesh Bose,sudesh.bose@ltts.com,Delhi,LTTS_INDIA
+W7590129,Miss,Priya,K,Jha,Female,1980-09-14,priya.jha@ltts.com,9820890167,56791123,BU30003033,Mid-Market,Associate,1980-09-14,QA Analyst,Sudesh Bose,sudesh.bose@ltts.com,Mumbai,LTTS_INDIA

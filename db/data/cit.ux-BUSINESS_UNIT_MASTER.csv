@@ -1,0 +1,8 @@
+business_unit_id,bu_name,bu_manager_id,bu_manager_name,bu_manager_email,bu_cost_center,bu_division,bu_location
+BU10001011,LTTS Healthcare,W9003276,Satish Sharma,satish.sharma@ltts.com,HLTH0001,0001,"Gujarat, India"
+BU20002022,LTTS Transportation,W8100187,Disha Arora,disha.arora@ltts.com,TRNS0001,0002,"Maharashtra, India"
+BU30003033,LTTS Telecommunications,W1110875,Rahul Verma,rahul.verma@ltts.com,TELE0001,0003,"Maharashtra, India"
+BU40004044,LTTS Media,W1007619,Irfan Shaikh,irfan.shaikh@ltts.com,MEDI0001,0004,"Karnataka, India"
+BU50005055,LTTS Oil Gas,W3799001,Jennifer Lobo,jennifer.lobo@ltts.com,OILG0001,0005,"Gujarat, India"
+BU60006066,LTTS Finance,W5100129,Mandeep Kaur,mandeep.kaur@ltts.com,FINC0001,0006,"Tamil Nadu, India"
+BU90009009,LTTS Global IT,W7779092,Sukhbir Singh,sukhbir.singh@ltts.com,GLIT0001,0009,"Karnataka, India"
